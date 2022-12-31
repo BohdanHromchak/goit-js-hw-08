@@ -1,4 +1,4 @@
-import { kebabCase } from 'lodash';
+import _, { kebabCase } from 'lodash';
 // console.log(kebabCase);
 
 const form = document.querySelector('.feedback-form');
@@ -7,7 +7,8 @@ const storedMessage = document.querySelector('[name="message"]');
 
 const KEY_LOCAL = 'feedback-form-state';
 
-form.addEventListener('input', onForm);
+form.addEventListener('input', _.throttle(onForm, 500));
+// form.addEventListener('input', onForm);
 
 // fill form from local storage
 
@@ -42,6 +43,6 @@ function onForm(evt) {
 form.addEventListener('submit', evt => {
   evt.preventDefault();
   form.reset();
-  localStorage.clear();
   console.log(data);
+  localStorage.clear();
 });
